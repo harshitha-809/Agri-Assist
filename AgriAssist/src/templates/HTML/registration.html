@@ -1,0 +1,302 @@
+{% load static%}
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!----======== CSS ======== -->
+		<link rel="stylesheet" href="{% static "CSS/registration.css" %}" />
+
+		<!----===== Iconscout CSS ===== -->
+		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+		<link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+
+		<title>Registration</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<header>Registration</header>
+
+			<form
+				id="registrationForm"
+				action="{% url 'register' %}"
+				method="post"
+				onsubmit="return validateForm()">
+				{% csrf_token %}
+				<input type="hidden" name="usertype" value="Farmer" />
+				<div class="form first">
+					<div class="details personal">
+						<span class="title">Personal Details</span>
+
+						<div class="fields">
+							<div class="input-field">
+								<label>Full Name</label>
+								<input
+									type="text"
+									placeholder="Enter your name"
+									required
+									name="fname" />
+							</div>
+
+							<div class="input-field">
+								<label>Date of Birth</label>
+								<input
+									type="date"
+									placeholder="Enter birth date"
+									required
+									id="dob"
+									name="dob" />
+							</div>
+
+							<div class="input-field">
+								<label>Age</label>
+								<input
+									type="text"
+									placeholder="Enter your Age"
+									required
+									name="age"
+									id="age"
+									readonly />
+							</div>
+
+							<div class="input-field">
+								<label>Mobile Number</label>
+								<input
+									type="number"
+									placeholder="Enter mobile number"
+									required
+									name="mobile" />
+							</div>
+
+							<div class="input-field">
+								<label>Gender</label>
+								<select name="gender" required>
+									<option disabled selected>Select gender</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Others">Others</option>
+								</select>
+							</div>
+
+							<div class="input-field">
+								<label>Nationality</label>
+								<input
+									type="text"
+									placeholder="Enter your Nationality"
+									name="nationality" />
+							</div>
+						</div>
+					</div>
+
+					<div class="details ID">
+						<span class="title">Farm Details</span>
+
+						<div class="fields">
+							<div class="input-field">
+								<label>Soil Type</label>
+								<select name="soiltype" required>
+									<option disabled selected>Select Soil</option>
+									<option value="Red Soil">Red Soil</option>
+									<option value="Black Soil">Black Soil</option>
+									<option value="Clay Soil">Clay Soil</option>
+									<option value="Sand">Sand</option>
+								</select>
+							</div>
+
+							<div class="input-field">
+								<label>Primary Crops</label>
+								<input
+									type="text"
+									placeholder="Details of Primary Crops Grown"
+									name="pcrops"
+									required />
+							</div>
+
+							<div class="input-field">
+								<label>Farm Ownership</label>
+								<select name="farmownership" required>
+									<option disabled selected>Select ownership</option>
+									<option value="Owned">Owned</option>
+									<option value="Leased">Leased</option>
+									<option value="Shared">Shared</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="details ID">
+						<span class="title">Farm Address Details</span>
+
+						<div class="fields">
+							<div class="input-field">
+								<label>Village/Town</label>
+								<input
+									type="text"
+									placeholder="Enter Village/TownDetails"
+									name="village"
+									required />
+							</div>
+							<div class="input-field">
+								<label>State</label>
+								<input
+									type="text"
+									placeholder="Enter State Name"
+									required
+									name="state" />
+							</div>
+
+							<div class="input-field">
+								<label>PIN Code</label>
+								<input
+									type="number"
+									placeholder="Enter PIN Code"
+									required
+									name="pin" />
+							</div>
+						</div>
+
+						<button class="nextBtn">
+							<span class="btnText">Next</span>
+							<i class="uil uil-navigator"></i>
+						</button>
+					</div>
+				</div>
+
+				<div class="form second">
+					<p class="ca">Create Account</p>
+
+					<div class="input-box-l">
+						<input
+							type="text"
+							placeholder="Enter your Username"
+							id="username"
+							required
+							name="uname" />
+					</div>
+					<div class="input-box-l">
+						<input type="email" placeholder="Enter your email" required name="email" />
+					</div>
+					<div class="input-box-l">
+						<input
+							class="create_pw"
+							type="password"
+							placeholder="Create password"
+							id="password"
+							required
+							name="password" />
+						<i class="bx bx-hide eye-icon"></i>
+					</div>
+					<div class="input-box-l" style="margin-bottom: 25px">
+						<input
+							class="confirm_pw"
+							type="password"
+							onkeyup="validatePassword()"
+							placeholder="Confirm password"
+							id="confirmPassword"
+							required />
+						<i class="bx bx-hide eye-icon"></i>
+						<p id="passwordError" class="error"></p>
+					</div>
+					<div class="policy">
+						<input type="checkbox" id="terms&c" required />
+						<h3>I accept all terms & condition</h3>
+					</div>
+
+					<div class="buttons">
+						<div class="backBtn">
+							<i class="uil uil-navigator"></i>
+							<span class="btnText">Back</span>
+						</div>
+
+						<button class="sumbit" id="submitBtn">
+							<span class="btnText">Submit</span>
+							<i class="uil uil-navigator"></i>
+						</button>
+					</div>
+					<!-- <div class="input-box-l button">
+                    <input type="Submit" value="Register Now">
+                  </div> -->
+					<div class="text-l">
+						<h3>Already have an account? <a href="{% url 'login' %}">Login now</a></h3>
+					</div>
+
+					<!-- <div class="details address">
+                    <span class="title">Address Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Address Type</label>
+                            <input type="text" placeholder="Permanent or Temporary" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Nationality</label>
+                            <input type="text" placeholder="Enter nationality" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>State</label>
+                            <input type="text" placeholder="Enter your state" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>District</label>
+                            <input type="text" placeholder="Enter your district" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Block Number</label>
+                            <input type="number" placeholder="Enter block number" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Ward Number</label>
+                            <input type="number" placeholder="Enter ward number" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details family">
+                    <span class="title">Family Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Father Name</label>
+                            <input type="text" placeholder="Enter father name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Mother Name</label>
+                            <input type="text" placeholder="Enter mother name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Grandfather</label>
+                            <input type="text" placeholder="Enter grandfther name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Spouse Name</label>
+                            <input type="text" placeholder="Enter spouse name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Father in Law</label>
+                            <input type="text" placeholder="Father in law name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Mother in Law</label>
+                            <input type="text" placeholder="Mother in law name" required>
+                        </div>
+                    </div> -->
+				</div>
+			</form>
+		</div>
+
+		<script src="{% static 'JS/registration.js' %}"></script>
+	</body>
+</html>

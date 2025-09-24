@@ -1,0 +1,96 @@
+{% extends "farmer/base.html" %} {% load static %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+<div class="m-4">
+    <div class="border shadow-lg rounded-xl h-fit">
+        <div class="py-2 px-4 border-b bg-gray-50 rounded-xl rounded-b-none">
+            <span class="text-xl font-semibold">Account Details</span>
+            <p class="text-gray-700">Your account details that were shared to us.</p>
+        </div>
+        <div class="p-4">
+            <div class="md:flex gap-4">
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">Full Name</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.name}}">
+                </div>
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">Date of Birth</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.dob|date:'d M Y'}}">
+                </div>
+            </div>
+            <div class="md:flex gap-4">
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">Mobile Number</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.mobile}}">
+                </div>
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">Gender</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.gender}}">
+                </div>
+            </div>
+            <div class="md:flex gap-4">
+                <div class="flex flex-col gap-1 mb-4 w-full">
+                    <label class="text-md">Nationality</label>
+                    <input type="text" class="p-2 w-full rounded-lg border focus:outline-none" readonly value="{{user.nationality}}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-4">
+    <div class="border shadow-lg rounded-xl h-fit">
+        <div class="py-2 px-4 border-b bg-gray-50 rounded-xl rounded-b-none">
+            <span class="text-xl font-semibold">Farm Details</span>
+            <p class="text-gray-700">Your Farm details that were shared to us.</p>
+        </div>
+        <div class="p-4">
+            <div class="md:flex gap-4">
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">Soil Type</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.soilType}}">
+                </div>
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">Details of Primary Crops</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.primaryCrops}}">
+                </div>
+            </div>
+            <div class="md:flex gap-4">
+                <div class="flex flex-col gap-1 mb-4 w-full">
+                    <label class="text-md">Farm OwnerShip</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.ownership}}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-4">
+    <div class="border shadow-lg rounded-xl h-fit">
+        <div class="py-2 px-4 border-b bg-gray-50 rounded-xl rounded-b-none">
+            <span class="text-xl font-semibold">Farm Address Details</span>
+            <p class="text-gray-700">Your Farm Address details that were shared to us.</p>
+        </div>
+        <div class="p-4">
+            <div class="md:flex gap-4">
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">Village/Town</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.town}}">
+                </div>
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">State</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.state}}">
+                </div>
+            </div>
+            <div class="md:flex gap-4">
+                <div class="flex flex-col gap-1 mb-4 md:w-1/2">
+                    <label class="text-md">PIN Code</label>
+                    <input type="text" class="p-2 rounded-lg border focus:outline-none" readonly value="{{user.pincode}}">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

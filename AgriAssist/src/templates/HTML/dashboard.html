@@ -1,0 +1,170 @@
+{% extends "base.html" %} {% load static %} {% block styles %}
+<link rel="stylesheet" href="{% static 'CSS/dashboard.css' %}" />
+<script src="{% static 'JS/dashboard.js' %}"></script>
+{% endblock styles %} {% block content %}
+<div class="profileCard">
+	<div class="categories">
+		<ul>
+			<li class="active border-tl" onclick="settingShow(this, 'personal')">
+				<i class="bx bx-user"></i>
+				<span>Personal Details</span>
+			</li>
+            {% if user.usertype == "Farmer" %}
+			<li onclick="settingShow(this, 'farm')">
+				<i class="bx bx-info-circle"></i>
+				<span>Farm Details</span>
+			</li>
+			<li onclick="settingShow(this, 'security')">
+				<i class="bx bx-lock-alt"></i>
+				<span>Farm Address Details</span>
+			</li>
+            {% endif %}
+            {% if user.usertype == "User" %}
+            <li onclick="settingShow(this, 'farm')">
+				<i class="bx bx-info-circle"></i>
+				<span>Business Details</span>
+			</li>
+			<li onclick="settingShow(this, 'security')">
+				<i class="bx bx-lock-alt"></i>
+				<span>Address Details</span>
+			</li> 
+            {% endif %}
+
+		</ul>
+	</div>
+	<div class="profile-details">
+		<div id="personal" class="detailSection">
+			<h3>Account</h3>
+			<span class="text-xs text-gray">Your account details that were shared to us.</span>
+
+			<div class="row">
+				<div class="detail">
+					<label>Full Name</label>
+					<input readonly value="{{user.name}}" />
+				</div>
+				<div class="detail">
+					<label>Date of Birth</label>
+					<input readonly value="{{user.dob|date:'d M Y'}}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="detail">
+					<label>Mobile Number</label>
+					<input readonly value="{{user.mobile}}" />
+				</div>
+				<div class="detail">
+					<label>Gender</label>
+					<input readonly value="{{user.gender}}" />
+				</div>
+			</div>
+            <div class="row">
+				<div class="detail">
+					<label>Nationality</label>
+					<input readonly value="{{user.nationality}}" />
+				</div>
+				
+			</div>
+		</div>
+        {% if user.usertype == "Farmer" %}
+		<div id="farm" class="hidden detailSection">
+			<h3>Farm Details</h3>
+			<span class="text-xs text-gray">Your Farm details that were shared to us.</span>
+
+			<div class="row">
+				<div class="detail">
+					<label>Soil Type</label>
+					<input readonly value="{{user.soilType}}" />
+				</div>
+                <div class="detail">
+					<label>Details of Primary Crops</label>
+					<input readonly value="{{user.primaryCrops}}" />
+				</div>
+			</div>
+            <div class="row">
+				<div class="detail">
+					<label>Farm OwnerShip</label>
+					<input readonly value="{{user.ownership}}" />
+				</div>
+                
+			</div>
+		</div>
+		<div id="security" class="hidden detailSection">
+			<h3>Farm Address Details</h3>
+			<span class="text-xs text-gray">Your Farm Address details that were shared to us.</span>
+
+			<div class="row">
+				<div class="detail">
+					<label>Village/Town</label>
+                    <input readonly value="{{user.town}}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="detail">
+					<label>State</label>
+                    <input readonly value="{{user.state}}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="detail">
+					<label>PIN Code</label>
+                    <input readonly value="{{user.pincode}}" />
+				</div>
+			</div>
+			<div class="row">
+				<button class="pwdUpdateBtn">Close</button>
+			</div>
+		</div>
+        {% endif %}
+        {% if user.usertype == "User" %}
+        <div id="farm" class="hidden detailSection">
+			<h3>Business Details</h3>
+			<span class="text-xs text-gray">Your Business details that were shared to us.</span>
+
+			<div class="row">
+				<div class="detail">
+					<label>Type of Business</label>
+					<input readonly value="{{user.businessType}}" />
+				</div>
+                <div class="detail">
+					<label>Primary Business Purpose</label>
+					<input readonly value="{{user.primaryPurpose}}" />
+				</div>
+			</div>
+            <div class="row">
+				<div class="detail">
+					<label>Preferred Language</label>
+					<input readonly value="{{user.language}}" />
+				</div>
+                
+			</div>
+		</div>
+		<div id="security" class="hidden detailSection">
+			<h3>Address Details</h3>
+			<span class="text-xs text-gray">Your Address details that were shared to us.</span>
+
+			<div class="row">
+				<div class="detail">
+					<label>Village/Town</label>
+                    <input readonly value="{{user.town}}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="detail">
+					<label>State</label>
+                    <input readonly value="{{user.state}}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="detail">
+					<label>PIN Code</label>
+                    <input readonly value="{{user.pincode}}" />
+				</div>
+			</div>
+			<div class="row">
+				<button class="pwdUpdateBtn">Close</button>
+			</div>
+		</div>
+        {% endif %}
+	</div>
+	<div>{% endblock content %}</div>
+</div>

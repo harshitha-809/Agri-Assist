@@ -1,0 +1,135 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    color: black;
+}
+
+.profileCard {
+    background-color: rgb(243 244 246);
+    width: 90%;
+    border: 1px solid black;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: .7rem;
+    display: flex;
+}
+
+.profileCard .categories {
+    
+    border-top-left-radius: .7rem;
+    border-bottom-left-radius: .7rem;
+    width: 30%;
+    /* border-right: 1px solid black; */
+    color: rgba(36, 34, 34, 0.916);
+}
+
+.profileCard .categories ul {
+    list-style: none;
+}
+
+.profileCard .categories ul li {
+    transition: all .3s ease-in-out;
+    margin: 10px 10px;
+    border-radius: .5rem;
+    padding: 10px 7px;
+    cursor: pointer;
+}
+
+.profileCard .categories ul li i {
+    background-color: rgb(236, 234, 234);
+    border-radius: .4rem;
+    padding: 3px;
+    margin: 0 5px;
+    font-size: 18px;
+}
+
+.profileCard .categories ul li span {
+    vertical-align: top;
+}
+
+.profileCard .categories ul li:hover {
+    background-color: rgb(236, 234, 234);
+}
+
+.profileCard .categories ul li.active {
+    background-color: white;
+    font-weight: bold;
+    /* background-color: rgb(218, 215, 215); */
+}
+
+.profileCard .categories ul li.active i {
+    background-color: white;
+    box-shadow: -2px 2px 5px rgb(0 0 0 / 0.2);
+}
+
+.border-tl {
+    border-top-left-radius: .7rem;
+}
+
+.profileCard .profile-details {
+    padding: 10px 20px;
+}
+
+.text-xs {
+    font-size: 14px;
+}
+.text-gray {
+    color: rgba(36, 34, 34, 0.916);
+}
+
+.profile-details {
+    width: 100%;
+    display: flex;
+    background-color: white;
+    margin: 10px;
+    border-radius: .7rem;
+}
+
+.detailSection {
+    margin-right: -100%;
+    width: 100%;
+}
+
+.profile-details .row {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+}
+
+.profile-details .detail {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.profile-details .detail label {
+    font-size: 14px;
+    margin-left: 2px;
+}
+
+.profile-details .detail input {
+    width: 50%;
+    border: 1px solid rgba(214, 214, 214, 0.891);
+    border-radius: .4rem;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.122);
+    cursor:auto;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.pwdUpdateBtn {
+    margin: 10px;
+    margin-left: auto;
+    background-color: black;
+    padding: 7px 20px;
+    border-radius: .7rem;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}

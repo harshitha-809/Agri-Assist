@@ -1,0 +1,44 @@
+{% load static%}
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="UTF-8" />
+		<title>User Selection</title>
+		<link rel="stylesheet" href="{% static "CSS/usertype.css" %}" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+	</head>
+	<body>
+		<div class="main-box">
+      <h1 class="w-full text-white font-bold title">Register as</h1>
+			<div class="content">
+				<input type="checkbox" id="check" />
+				<label class="box" for="check">
+					<div class="cancel" onclick="window.location.href = '{% url 'farmerregistration' %}' "> Register</div>
+				</label>
+				<div class="image-box">
+					<img src="{% static "images/farmericon-removebg-preview.png" %}" alt=""/>
+					<div class="about">
+						<h1>Farmer</h1>
+					</div>
+				</div>
+			</div>
+      <div class="content">
+				<input type="checkbox" id="check" />
+				<label class="box" for="check">
+					
+					<div class="cancel" onclick="window.location.href = '{% url 'user-registration' %}' "> Register</div>
+					
+				</label>
+				<div class="image-box">
+					<img src="{% static "images/a-cartoon-man-in-a-suit-holding-a-cell-phone-png-removebg-preview-transformed.png" %}" alt="" style="height: 17rem; margin-top:4rem;"/>
+          <div class="about">
+            <h1>User</h1>
+          </div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

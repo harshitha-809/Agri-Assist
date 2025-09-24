@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    .about-page {
+    font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.hero-section img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+.hero-section h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+/* Introduction Section */
+.intro-section {
+    padding: 2em 1em;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* History & Promise Sections */
+.history-section, .promise-section {
+    display: flex;
+    align-items: center;
+    padding: 2em 1em;
+}
+.history-section img, .promise-section img {
+    width: 50%;
+    height: auto;
+}
+.history-section .text-content, .promise-section .text-content {
+    width: 50%;
+    padding: 0 2em;
+}
+.history-section .text-content h2, .promise-section .text-content h2 {
+    font-size: 1.5em;
+    color: #3c8d0d;
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2em 1em;
+    text-align: left;
+}
+.footer-columns {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.footer-columns div {
+    flex: 1;
+}
+.footer-columns h3 {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+.footer-columns ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-columns ul li {
+    margin-bottom: 0.5em;
+}
+.footer-columns ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+.footer-columns ul li a:hover {
+    text-decoration: underline;
+}
+.social-links {
+    display: flex;
+    gap: 1em;
+}
+.social-links img {
+    width: 24px;
+    height: 24px;
+}
+.footer p {
+    text-align: center;
+    margin-top: 1em;
+}
+
+</style>
+<div class="about-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="{% static 'images/hero-image.jpg' %}" alt="AgriAssist Landscape">
+        <h1>ABOUT US</h1>
+        <p>Empowering Agriculture through Innovation</p>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <h2>AgriAssist</h2>
+        <p>AgriAssist was founded to revolutionize the way farmers access technology and resources, making agriculture more efficient and sustainable for future generations.</p>
+    </section>
+
+    <!-- History Section with Image -->
+    <section class="history-section">
+        <img src="{% static 'images/history-image.jpg' %}" alt="History Image">
+        <div class="text-content">
+            <h2>History of AgriAssist</h2>
+            <p>Since its inception, AgriAssist has been dedicated to enhancing agricultural practices through the use of modern technology and expertise, supporting farmers globally.</p>
+        </div>
+    </section>
+
+    <!-- Promise Section with Image -->
+    <section class="promise-section">
+        <div class="text-content">
+            <h2>Our Promise</h2>
+            <p>We are committed to continuous improvement, empowering farmers with the best resources and innovations in the industry.</p>
+        </div>
+        <img src="{% static 'images/promise-image.jpg' %}" alt="Promise Image">
+    </section>
+</div>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-columns">
+        <div>
+            <h3>ABOUT US</h3>
+            <ul>
+                <li><a href="#">Store Locator</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Corporate Gifting</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>HELP</h3>
+            <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Shipping</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>LEGAL</h3>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>FOLLOW US</h3>
+            <ul class="social-links">
+                <li><a href="#"><img src="{% static 'icons/facebook.svg' %}" alt="Facebook"></a></li>
+                <li><a href="#"><img src="{% static 'icons/twitter.svg' %}" alt="Twitter"></a></li>
+            </ul>
+        </div>
+    </div>
+    <p>© AgriAssist 2024. All rights reserved.</p>
+</footer>
+{% endblock %}

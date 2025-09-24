@@ -1,0 +1,184 @@
+{% load static%}
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!----======== CSS ======== -->
+		<link rel="stylesheet" href="{% static "CSS/registration.css" %}" />
+
+		<!----===== Iconscout CSS ===== -->
+		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+		<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+
+		<title>Registration</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<header>Registration</header>
+
+			<form action="{% url 'register' %}" method="post" onsubmit="return validateForm()">
+				{% csrf_token %}
+				<input type="hidden" name="usertype" value="User">
+
+				<div class="form first">
+					<div class="details personal">
+						<span class="title">Personal Details</span>
+
+						<div class="fields">
+							<div class="input-field">
+								<label>Full Name</label>
+								<input type="text" placeholder="Enter your name" name="fname" required />
+							</div>
+
+							<div class="input-field">
+								<label>Date of Birth</label>
+								<input type="date" placeholder="Enter birth date" name="dob" id="dob" required />
+							</div>
+
+							<div class="input-field">
+								<label>Age</label>
+								<input type="text" placeholder="Enter your Age" required  name="age" id="age" readonly />
+							</div>
+
+							<div class="input-field">
+								<label>Mobile Number</label>
+								<input type="number" placeholder="Enter mobile number" name="mobile" required />
+							</div>
+
+							<div class="input-field">
+								<label>Gender</label>
+								<select name="gender" required>
+									<option disabled selected>Select gender</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Others">Others</option>
+								</select>
+							</div>
+
+							<div class="input-field">
+								<label>Nationality</label>
+								<input type="text" placeholder="Enter your Nationality" name="nationality" />
+							</div>
+						</div>
+					</div>
+
+					<div class="details ID">
+						<span class="title">Business Details</span>
+
+						<div class="fields">
+							<div class="input-field">
+								<label>Type of Business</label>
+								<select name="businesstype" required>
+									<option disabled selected>Select Business Type</option>
+									<option value="Retailer">Retailer</option>
+									<option value="WholeSale">WholeSale</option>
+									<option value="Individual">Individual</option>
+									<option value="Distributor">Distributor</option>
+								</select>
+							</div>
+
+							<div class="input-field">
+								<label>Primary Purpose</label>
+								<select name="primarypurpose" required>
+									<option disabled selected>Select Purpose </option>
+									<option value="To Buy directly from Farmers">To Buy directly from Farmers</option>
+									<option value="To Establish an Intermediate Business">To Establish an Intermediate Business</option>
+									<option value="Others">Others</option>
+								</select>
+							</div>
+
+							<div class="input-field">
+								<label>Preferred Language</label>
+								<select name="language" required>
+									<option disabled selected>Select Language</option>
+									<option value="English">English</option>
+									<option value="Telugu">Telugu</option>
+									<option value="Hindi">Hindi</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="details ID">
+						<span class="title">Address Details</span>
+
+						<div class="fields">
+							<div class="input-field">
+								<label>Village/Town</label>
+								<input
+									type="text"
+									placeholder="Enter Village/TownDetails"  name="village"
+									required />
+							</div>
+							<div class="input-field">
+								<label>State</label>
+								<input type="text" placeholder="Enter State Name" name="state" required />
+							</div>
+
+							<div class="input-field">
+								<label>PIN Code</label>
+								<input type="number" placeholder="Enter PIN Code" name="pin" required />
+							</div>
+						</div>
+
+						<button class="nextBtn">
+							<span class="btnText">Next</span>
+							<i class="uil uil-navigator"></i>
+						</button>
+					</div>
+				</div>
+
+				<div class="form second">
+			<p class="ca">Create Account</p>
+
+			<div class="input-box-l">
+				<input type="text" placeholder="Enter your Username" id="username" required name="uname" />
+			</div>
+			<div class="input-box-l">
+				<input type="email" placeholder="Enter your email"  required name="email" />
+			</div>
+			<div class="input-box-l">
+				<input class="create_pw" type="password" placeholder="Create password" id="password" required name="password"/>
+				<i class='bx bx-hide eye-icon'></i>
+			</div>
+			<div class="input-box-l" style="margin-bottom: 25px;">
+				<input class="confirm_pw" type="password" onkeyup="validatePassword()" placeholder="Confirm password" id='confirmPassword' required />
+				<i class='bx bx-hide eye-icon'></i>
+				<p id="passwordError" class="error"></p>
+			</div>
+			<div class="policy">
+				<input type="checkbox" id="terms&c" required/>
+				<h3>I accept all terms & condition</h3>
+			</div>
+
+					<div class="buttons">
+						<div class="backBtn">
+							<i class="uil uil-navigator"></i>
+							<span class="btnText">Back</span>
+						</div>
+
+						<button class="sumbit">
+							<span class="btnText">Submit</span>
+							<i class="uil uil-navigator"></i>
+						</button>
+					</div>
+					<!-- <div class="input-box-l button">
+                    <input type="Submit" value="Register Now">
+                  </div> -->
+					<div class="text-l">
+						<h3>Already have an account? <a href="{% url 'login' %}">Login now</a></h3>
+					</div>
+                    
+
+				</div>
+			</form>
+		</div>
+
+		<script src="{% static 'JS/registration.js' %}"></script>
+	</body>
+</html>

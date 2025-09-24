@@ -1,0 +1,86 @@
+{% load static%}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriAssist</title>
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+    <!-- Unicons CSS -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+		<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+   <script src="{% static 'JS/script.js' %}" defer></script>
+   {% block styles %}
+   {% endblock %}
+  </head>
+  <body>
+    <nav class="nav">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="#" class="logo">AgriAssist</a>
+  
+        <ul class="nav-links">
+          <i class="uil uil-times navCloseBtn"></i>
+          <li><a href="{% url 'home' %}" class="active">Home</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/forum">Community</a></li>
+          {% if not user.is_authenticated %}
+            <li><a href="{% url 'selectuser' %}">Register</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+          
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <!-- <li><a href="#">Contact Us</a></li> -->
+          <i class="uil uil-search search-icon" id="searchIcon"></i>
+          <div class="search-box">
+            <i class="uil uil-search search-icon"></i>
+            <input type="text" placeholder="Search here..." />
+          </div>
+        </ul>
+        {% if user.is_authenticated %}
+        <div class="action" style="flex-grow:initial">
+          <div class="profile" onclick="menuToggle();">
+            <i class='bx bx-user' style="color: black;"></i>
+          </div>
+          <div class="menu" id="userprofile">
+            <h3>Hello</h3>
+            <ul>
+              <li>
+                <img src="{% static 'images/user.png' %}" /><a href="{% url 'dashboard' %}">My profile</a>
+              </li>
+              <li>
+                <img src="{% static 'images/log-out.png' %}" /><a href="{% url 'logout'%}">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% else %}
+        <div></div>
+        {% endif %}
+  	</nav>
+
+		{% block content %}
+
+		{% endblock %}
+    {% if user.is_authenticated %}
+      {% if user.usertype|lower == 'farmer' %}
+      <script>
+        !(function(){const sc=document.createElement('script');sc.src="https://apps.voc.ai/api_v2/gpt/bots/livechat/embed.js?id=19132&token=67276627E4B0DD4BCF9FB24B";sc.async=true;sc.defer=true;document.body.appendChild(sc);})()
+      </script>
+      {% endif %}
+    {% endif %}
+  </body>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    $(function () {
+        $(document).scroll(function () {
+            var $nav = $(".nav");
+            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        });
+    });
+    
+    </script>
+</html>

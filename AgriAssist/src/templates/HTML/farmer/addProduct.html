@@ -1,0 +1,256 @@
+{% extends "farmer/base.html" %} {% load static %}
+{% block content %}
+<div class="mt-6 ml-4 flex">
+    <div>
+        <span> <a href="#" class="text-gray-600">Products</a> / Add Product</span>
+        <p class="text-2xl font-semibold py-1">Add Product</p>
+    </div>
+    <div class="bg-primary disabled:bg-gray-400 p-3 px-10 text-white cursor-pointer disabled:cursor-not-allowed rounded-xl ml-auto w-fit mr-4 h-fit product-submit" disabled>Save</div>
+</div>
+<hr class="mx-4 my-2">
+<div class="md:flex mx-4 mt-4 mb-8 gap-4 text-gray-800">
+    <div class="border shadow-lg rounded-xl md:w-[60%] h-fit">
+        <div class="py-2 px-4 border-b bg-gray-50 rounded-xl rounded-b-none">
+            <span class="text-lg font-semibold">Product Details</span>
+        </div>
+        <div class="p-4">
+            <div class="flex flex-col gap-1 mb-4">
+                <label class="text-md">Name</label>
+                <input type="text" class="p-2 rounded-lg border focus:outline-none product-form" name="title">
+            </div>
+            <div class="flex flex-col gap-1 mb-4">
+                <label class="text-md">Images</label>
+                <div class="flex gap-2">
+                    <div class="border bg-gray-50/60 rounded-lg p-2 text-center w-32 h-32 flex items-center justify-center hover:bg-gray-50 hover:shadow-md cursor-pointer product-images-parent">
+                        <i class="bx bx-image-add text-5xl"></i>
+                    </div>
+                    <input type="file" accept="image/*" multiple name="images" class="hidden product-form product-images pointer-events-none">
+                </div>
+            </div>
+            <div class="flex mb-4 gap-2">
+                <div class="flex flex-col gap-1 w-1/2">
+                    <label class="text-md">Label</label>
+                    <select class="p-2 rounded-lg border focus:outline-none product-form" name="label">
+                        <option value="S">Sale</option>
+                        <option value="N">New</option>
+                    </select>
+                </div> 
+                <div class="flex flex-col gap-1 w-1/2">
+                    <label class="text-md">Quantity</label>
+                    <input type="number" class="p-2 rounded-lg border focus:outline-none product-form" name="quantity">
+                </div>    
+            </div>
+            <div class="flex flex-col gap-1 mb-4">
+                <label class="text-md">Quick Info</label>
+                <input type="text" class="p-2 rounded-lg border focus:outline-none product-form" name="desc-short" maxlength="50">
+            </div>
+            <div class="flex flex-col gap-1 mb-4">
+                <label class="text-md">Description</label>
+                <textarea type="text" class="p-2 rounded-lg border focus:outline-none product-form" name="desc-long" rows="8"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="md:w-[40%]">
+        <div class="border shadow-lg rounded-xl h-fit my-8 md:mb-4 md:mt-0">
+            <div class="py-2 px-4 border-b bg-gray-50 rounded-xl rounded-b-none">
+                <span class="text-lg font-semibold bg-gray-50">Pricing</span>
+            </div>
+            <div class="p-4">
+                <div class="flex flex-col gap-1 mb-4">
+                    <label class="text-md">Price</label>
+                    <input type="number" class="p-2 rounded-lg border focus:outline-none product-form" name="price">
+                </div>
+                <div class="flex flex-col gap-1 mb-4">
+                    <label class="text-md">Discount Price</label>
+                    <input type="number" class="p-2 rounded-lg border focus:outline-none product-form" name="discount-price">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-md">Category</label>
+                    <select class="p-2 rounded-lg border focus:outline-none product-form" name="category">
+                        <option value="">---</option>
+                        {% for category in categories %}
+                        <option value="{{category.pk}}">{{category.title}}</option>
+                        {% endfor %}
+                    </select>
+                </div> 
+            </div>
+        </div>
+        <div class="border shadow-lg rounded-xl h-fit my-8 md:my-0">
+            <div class="py-2 px-4 border-b bg-gray-50 rounded-xl rounded-b-none">
+                <span class="text-lg font-semibold bg-gray-50">Variants</span>
+                <p class="text-sm">Eg: 1 kg pack, 5 kg pack, 100g pack</p>
+            </div>
+            <div class="p-4 last-variant">
+                <div class="flex">
+                    <label class="text-md w-1/4 my-auto">Pack of: </label>
+                    <input type="number" class="p-2 text-center rounded-l-lg border border-r-0 focus:outline-none h-12 w-2/4 product-form product-variant" name="variant-1">
+                    <select class="p-2 rounded-r-lg border focus:outline-none w-1/4 h-12" name="variant-1-type">
+                        <option value="Kg">Kg</option>
+                        <option value="Grams">grams</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-4 text-primary text-center flex items-center justify-center gap-1 cursor-pointer w-fit mx-auto add-variant">
+                <span class="border border-primary text-sm w-4 h-4 rounded-full inline-flex items-center justify-center">+</span>
+                <p>Add another variant</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    (function() {
+        let time = 0;
+        $('.product-form').on('keyup', function (e) {
+            // Reset the timer
+            clearTimeout(time);
+            time = setTimeout(function() {
+                if ($(e.target).val())
+                    $(e.target).change();
+            }, 500);
+        })
+    })();
+    $(".product-form").change((e) => {
+        target = e.target;
+        $(target).removeClass("border-red-400 ring-1 ring-red-400");
+        if ($(target).hasClass("product-variant") ||$(target).hasClass("product-images") ) target = $(target).parent();
+        $(target).next(".error-txt").remove();
+    })
+    $(".product-submit").click(function() {
+        var errors = 0;
+        $(".product-form").each(function(index, elem) {
+            if(!$(elem).val()) {
+                errors += 1;
+                $(elem).addClass("border-red-400 ring-1 ring-red-400");
+                let parent = $(elem).parent();
+                if ($(elem).hasClass("product-variant") || $(elem).hasClass("product-images"))
+                    parent = parent.parent();
+                if (!parent.has("span.error-txt")[0])
+                    parent.append("<span class='error-txt text-sm text-red-400'>This field is required</span>")
+            }
+        })
+        if (errors != 0) return;
+        var payload = new FormData();
+        var images = $(".product-images")[0].files
+        var form = $('.product-form').serializeArray();
+        for (i=0; i<images.length; ++i) {
+            if (i==0) payload.append("image", images[i]);
+            else payload.append("image"+(i+1), images[i]);
+        }
+        form.forEach(input => {
+            if(input['value']) {
+                if (input.name.startsWith("variant")) {
+                    var unit = $("input[name="+input.name+"]").siblings("select").val();
+                    input.value = input.value + " " + unit;
+                }
+                payload.append(input.name, input.value);
+            }
+        });
+        $("#loader").show();
+        $.ajax({
+            method: 'POST',
+            url: '/api/product/add',
+            data: payload,
+            processData: false,
+            contentType: false,
+            headers: {
+                "X-CSRFToken": "{{csrf_token}}",
+            },
+            success: (data) => {
+                if (data["status"] == "+OK") {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Saved",
+                        text: "Prodcut Saved Successfully!!",
+                    }).then(() => {
+                        window.location.href = "{% url 'editProduct' id=123 %}".replace('123', data["productId"]);
+                    })
+                } else {
+                    $("#loader").hide();
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Our servers gone nuts!!",
+                    });
+                }
+            },
+            error: (error) => {
+                $("#loader").hide();
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Our servers gone nuts!!",
+                });
+            }
+
+        })
+        
+    })
+    function updateProductFiles(fileList) {
+        var fileDiv = $(".product-images-parent");
+        fileDiv.siblings(".product-img").remove();
+        for(i=0; i<fileList.length; i++){
+            file = fileList[i];
+            $(".product-images").parent().prepend(`<div class='relative product-img'><img src='${URL.createObjectURL(file)}' class='w-32 h-32 border'></img><i class='bx bx-plus rotate-45 absolute top-0 right-0 bg-white rounded-full m-1 cursor-pointer removeFile' fileId='${i}'></i></div>`);
+            if (fileDiv.parent().children(".product-img").length == 3) {
+                fileDiv.addClass("hidden");
+                break;
+            } else {
+                if (fileDiv.hasClass("hidden")) fileDiv.removeClass("hidden");
+            }
+        };
+        $(".product-img i.removeFile").off("click");
+        $(".product-img i.removeFile").click((e) => {deleteImageHandler(e, fileList)});
+    }
+    function deleteImageHandler(e, filesArray) {
+        index = $(e.target).attr("fileId");
+        filesArray.splice(index, 1); // Remove the file from filesArray
+        updateProductFiles(filesArray); // Update the list
+        // Update the input element to reflect changes
+        const dataTransfer = new DataTransfer();
+        filesArray.forEach(file => dataTransfer.items.add(file));
+        $(".product-images")[0].files = dataTransfer.files;
+    }
+    (function () {
+        var filesArray = [];
+        $(".product-images-parent").click(() => {$(".product-images").click()});
+        $(".product-images").on( 'change', function(e) {
+            filesArray = Array.from(e.target.files);
+            updateProductFiles(filesArray);
+        });
+    })();
+
+    function removeVariant(e) {
+        var variantDiv = e.target.parentNode.parentNode;
+        if ($(variantDiv).hasClass("last-variant"))
+            $(variantDiv).prev("div").addClass("last-variant");
+        variantDiv.remove();
+        var lastId = 1;
+        $("input[name*=variant]").each(function(ind, elem) {
+            $(elem).attr("name", "variant-"+(ind+1));
+            lastId = ind+1;
+        })
+        if (lastId <= 3) {
+            if ($(".add-variant").hasClass("hidden")) $(".add-variant").removeClass("hidden");
+        }
+    }
+
+    $(".add-variant").click(function(e) {
+        var cloned = $(".last-variant").clone();
+        var clonedId = parseInt(cloned.find("input").attr("name").split("-")[1]);
+        if (clonedId == 1)
+            cloned.children("div").append('<i class="bx bx-plus text-lg mx-2 text-white bg-red-500 h-fit rounded-full my-auto rotate-45" onclick="removeVariant(event)"></i>');
+        cloned.find("input").val("");
+        cloned.find("input").attr("name", "variant-"+(clonedId+1));
+        $(".last-variant").after(cloned);
+        $(".last-variant")[0].classList.remove("last-variant");
+        if (clonedId >= 3) {
+            if ($(".add-variant")[0]){
+                $(".add-variant").addClass("hidden");
+                return
+            }
+        }
+    })
+    
+</script>
+{% endblock content %}

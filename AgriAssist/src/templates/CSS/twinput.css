@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Poppins";
+    font-weight: 300;
+    src: url("/static/fonts/poppins/Poppins-Light.ttf");
+}
+
+@font-face {
+    font-family: "Poppins";
+    font-weight: 400;
+    src: url("/static/fonts/poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Poppins";
+    font-weight: 700;
+    src: url("/static/fonts/poppins/Poppins-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Poppins";
+    font-weight: 600;
+    src: url("/static/fonts/poppins/Poppins-SemiBold.ttf");
+}
+
+@layer components {
+    .shortcut-btn {
+        @apply text-sm p-1 rounded-lg bg-white text-gray-700 shadow-inner font-medium;
+    }
+
+    #navLinks li.active {
+        @apply bg-white text-primary font-medium border border-primary shadow-sm shadow-primary/70;
+    }
+
+    .navLink.active div i {
+        @apply text-black;
+    }
+
+    .navLink {
+        @apply text-slate-700 rounded-xl cursor-pointer leading-none transition-all border border-transparent font-normal;
+    }
+
+    .navLink a {
+        @apply px-3 py-2 w-full;
+    }
+
+    .navLink:hover {
+        @apply bg-white shadow-sm border-default;
+    }
+
+    .navLink div i {
+        @apply text-slate-500 leading-6;
+    }
+}
