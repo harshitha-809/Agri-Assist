@@ -52,15 +52,18 @@ _____________________________________________________
 
 ## 📁 Project Structure
 
-<code> AgriAssist/
-├── agriassist/ # Django project settings
-├── forum/ # Community forum discussions and threads
-├── login/ # User Registrations Management
-├── mediaroot/ # Chatbot interaction and integration
-├── shop/ # Product listing and management
-├── templates/ # HTML templates
-└── manage.py # Django management script</code>
-
+```
+AgriAssist/
+│
+├── agriassist/          # Django project settings and configuration
+├── shop/                # Product listing, browsing, and management
+├── forum/               # Community discussions and threads
+├── login/               # User registration and authentication
+├── mediaroot/           # Chatbot integration (Voc.ai)
+├── templates/           # Shared HTML templates
+├── requirements.txt     # Python dependencies
+└── manage.py            # Django management script
+```
 ### Requirements
 - python 3.11
 - postgres server
